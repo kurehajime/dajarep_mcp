@@ -28,7 +28,7 @@ func main() {
 		),
 	)
 
-	// Add the calculator handler
+	// Add the dajare handler
 	s.AddTool(dajareTool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 		sentence := request.Params.Arguments["sentence"].(string)
 		s, _ := dajarep.Dajarep(sentence, 2, false)
