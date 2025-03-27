@@ -21,17 +21,17 @@ func main() {
 
 	// Add a dajare tool
 	dajareTool := mcp.NewTool("dajarep",
-		mcp.WithDescription("Determines if a sentence contains a pun. 文章に駄洒落が含まれているか判定します"),
-		mcp.WithString("sentence",
+		mcp.WithDescription("Determines if a sentences contains a pun. 文章に駄洒落が含まれているか判定します"),
+		mcp.WithString("sentences",
 			mcp.Required(),
-			mcp.Description("This argument is the sentence you want to determine if it is a pun."),
+			mcp.Description("This argument is the sentences you want to determine if it is a pun.This argument can accept a multi-line string."),
 		),
 	)
 
 	// Add the dajare handler
 	s.AddTool(dajareTool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-		sentence := request.Params.Arguments["sentence"].(string)
-		s, _ := dajarep.Dajarep(sentence, 2, false)
+		sentences := request.Params.Arguments["sentences"].(string)
+		s, _ := dajarep.Dajarep(sentences, 2, false)
 		result := map[string]interface{}{
 			"result":  len(s) > 0,
 			"matches": s,
